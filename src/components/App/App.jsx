@@ -21,7 +21,6 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
-
 function App() {
   const dispatch = useDispatch();
 
@@ -32,6 +31,7 @@ function App() {
   }, [dispatch]);
 
   return (
+<>
     <Router>
       <div>
         <Nav />
@@ -118,6 +118,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </>
   );
 }
 
