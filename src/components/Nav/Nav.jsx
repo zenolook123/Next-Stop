@@ -11,7 +11,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 export default function Nav() {
   const user = useSelector((store) => store.user);
-
+ 
+  console.log(user)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -27,7 +28,7 @@ export default function Nav() {
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <Link to="/home" style={{ textDecoration: 'none', color: 'inherit' }}>
-            {user.id ? 'Home' : 'Find the Next Stop!'}
+            {user.id ? `Welcome back ${user.username}!` : 'Find the Next Stop!'}
             </Link>
           </Typography>
           {!user.id ? (
@@ -40,9 +41,14 @@ export default function Nav() {
                 <Button color="inherit">Home</Button>
               </Link>
               <Link to="/info" style={{ textDecoration: 'none', color: 'inherit' }}>
-                <Button color="inherit">Info Page</Button>
+                <Button color="inherit">Find Meets</Button>
               </Link>
-              <LogOutButton />
+              <Link to="/createameet" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Button color="inherit">Create a Meet</Button>
+              </Link>
+              <Link to="/mymeets" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Button color="inherit">My Meets</Button>
+              </Link>
             </>
           )}
         </Toolbar>

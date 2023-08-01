@@ -1,7 +1,7 @@
 CREATE TABLE "user" (
     id SERIAL PRIMARY KEY,
-    usernames varchar(60) NOT NULL,
-    passwords varchar(1000) NOT NULL
+    username varchar(60) NOT NULL,
+    password varchar(1000) NOT NULL
 );
 
 CREATE TABLE "meetups" (
