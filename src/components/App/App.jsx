@@ -22,6 +22,10 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
 import CreateAMeet from '../CreateAMeet/CreateAMeet';
+
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+
 function App() {
   const dispatch = useDispatch();
 
@@ -33,6 +37,7 @@ function App() {
 
   return (
 <>
+<LocalizationProvider dateAdapter={AdapterDayjs}>
     <Router>
       <div>
         <Nav />
@@ -117,7 +122,6 @@ function App() {
               <LandingPage />
             }
           </Route>
-
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>No Matches</h1>
@@ -126,6 +130,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </LocalizationProvider>
     </>
   );
 }

@@ -1,7 +1,58 @@
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import { TextField } from '@mui/material';
 import { Button, Container } from "@mui/material"
+import axios from "axios";
+import { useState } from "react";
+import { DateTimePicker } from '@mui/x-date-pickers';
 
-function CreateAMeet() {
+
+function CustomTabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box sx={{ p: 3 }}>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    );
+}
+
+CustomTabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+}
+
+export default function CreateAMeet() {
+
+    const gifurl = 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921'
+    const [image, setImageURL] = useState("https://icons.veryicon.com/png/o/miscellaneous/1em/add-image.png")
+    const [address, setAddress] = useState('')
+    const [date, setDate] = useState()
+    //When grabbing date its date.$d
     const handleSubmit = (event) => {
+        setImageURL(gifurl)
         event.preventDefault();
         const formData = new FormData();
         formData.append('photo', event.target.photo.files[0]);
@@ -9,36 +60,90 @@ function CreateAMeet() {
         axios.post('/api/upload', formData)
             .then((response) => {
                 const imageUrl = response.data.imageUrl;
+                setImageURL(imageUrl)
                 console.log('Image URL', imageUrl);
             })
             .catch((error) => {
                 console.error('Error uploading file:', error);
             });
     };
+    const [value, setValue] = React.useState(0);
 
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     return (
-        <div>
-            <Container sx={{ justifyContent: 'center', display: 'flex' }}>
-                <Button variant="contained" style={{ margin: '40px' }}>Add a meet photo</Button>
-                <Button variant="contained" style={{ margin: '40px' }}>Invite</Button>
-                <Button variant="contained" style={{ margin: '40px' }}>Address</Button>
-                <Button variant="contained" style={{ margin: '40px' }}>Date</Button>
-                <Button variant="contained" style={{ margin: '40px' }}>Finish Meet</Button>
-            </Container>
-            <Container sx={{ backgroundColor: 'lightGray', height: '1000px', marginTop: '20px' }}>
-                <Button variant="contained" style={{ margin: '40px' }}>Upload</Button>
-                <Button variant="contained" style={{ margin: '40px' }}>Delete</Button>
+        <Box sx={{ width: '100%' }}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" variant='fullWidth'>
+                    <Tab label="Choose a photo for the meet" {...a11yProps(0)} />
+                    <Tab label="Invite Members" {...a11yProps(1)} />
+                    <Tab label="When/Where?" {...a11yProps(2)} />
+                </Tabs>
+            </Box>
+            <CustomTabPanel value={value} index={0}>
                 <div>
-                    <img src="https://weekendspikebucket.s3.us-east-2.amazonaws.com/1690736706279-71172864794__3AFF6FB1-4B09-4D13-B58F-EE0824DE69A9.jpeg?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEEaCXVzLWVhc3QtMiJIMEYCIQCJ4DqDz%2FUyWBD2xkrNO2b1Ee%2FsCIX0nHfSVF7GDgwdcgIhAOJ%2BCqTbt1vPZOwZFta7fAPhluOMT9W%2FUmzBhA2pDvWdKu0CCNr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMMzc5ODA3NDM4MTM3Igz1gU9toYT6l9zJmjEqwQIFNAF84Sipjg1KmtltQ9jOiuOptAoKJR2tvyDEZRIp66NjTHgsK%2Bo6F37WIR4%2B05hhb86saSLzdoz78GEs0UVmBdeeOCQvTDKzA9rWlK6jr34e0YnbJmHx6%2FiCr0R8JnLli40AgV0f4mIMj10d85B%2BLdGEx%2B91ztIZIqjPj7U9yvc5FwnBYaMhRFQAcWQFWmpU31aMTrIDc%2BulGSyotx3a7A9tf01QEfzKNPJTg677r57STD15wqO%2FBcYTdDwhxEg%2BmdkdG2Bd7xBZNPUaiQH4mJycCVIDuxXBTjxsKxL2EaHewAF9dnw%2BAgpDEspHb%2FXaH4k9O%2Bm%2FVpDN2L6TtrPQ1f9e6sCxC6zdtZqZ91r7bzmtHMn1ahWgIZP6XbAqfzP8mV7B3I%2B7186eWXmACc%2FhnXED60eEyiHMIqqHI20HOxQw6%2B%2BkpgY6sgKx2QH9y89fTyeM4vBTzL54CSYiSwK9ULgJRjMwjitmL%2B2kgstpZA8hug2Tjny7bEwrtPiSEghSeJLKts4XxGeiCVMIWEJrwNf0kt%2Fcinfx%2BKCCvhHEdkWyKaPOF0MsgxT42pPGxbnmdz71HotBZnue7gdR0bCEy7unkF4ihczOkP7lhKpKwaP5VMQE2evHnPPRN4sWmxJQSkQd55%2B1as1E7QvGfQ%2BP2p5dfptabuMUM19EhUw2yQOtUtz9S2oGUP%2BstCnUAGJhmJEdOZ8RKtG3ajAxRibWfM6%2FhQpSNfBwTvujBdwKWl7wwvScrLDQsf3wWke4WnCqrQT40BTLCORGgiTu53Tz8sl78wvznelf5WsM0UnRWb2qSYjPhOlerWwqDgZ7RzHaLId5Kbf8zGioVJQ%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230801T165151Z&X-Amz-SignedHeaders=host&X-Amz-Expires=60&X-Amz-Credential=ASIAVQ3SJSU46OFT2BFA%2F20230801%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Signature=d7887feeae7f8f9f81030fd55bd4e1f4e464479f5f4981558afec7bf0952b08a" style={{ maxHeight: '300px', maxWidth: '300px' }}></img>
-                    <form encType='multipart/form-data' onSubmit={handleSubmit}>
-                    <input type="file" name='photo' />
-                    <button type="submit">Upload</button>
-                     </form>
+                    <Container>
+                        <div style={{ justifyContent: 'center', display: 'flex' }}>
+                            <Container sx={{ justifyContent: 'center', display: 'flex' }}>
+                                <form encType='multipart/form-data' onSubmit={handleSubmit}>
+                                    <input type="file" name='photo' />
+                                    <button type="submit">Upload Photo</button>
+                                </form>
+                            </Container>
+                            <Container sx={{ display: 'flex', justifyContent: 'center' }}>
+                                <img src={image} style={{ maxHeight: '500px', maxWidth: '500px', display: 'inline-flex' }}></img>
+                            </Container>
+                        </div>
+                    </Container>
                 </div>
-            </Container>
-        </div>
-    )
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={1}>
+                <div>
+                    <Container>
+                        <div style={{ justifyContent: 'center', display: 'flex' }}>
+                            <Container sx={{ justifyContent: 'center', display: 'flex', backgroundColor: 'red' }}>
+                                List of members here
+                            </Container>
+                        </div>
+                    </Container>
+                </div>
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={2}>
+                <div>
+                    <Container>
+                        <h2>Where do you want to meet up?</h2>
+                        <div style={{ justifyContent: 'center', display: 'flex' }}>
+                            <Container sx={{ justifyContent: 'left', display: 'flex' }}>
+                                <TextField
+                                    id="outlined-controlled"
+                                    label="Enter an address"
+                                    value={address}
+                                    onChange={(event) => {
+                                        setAddress(event.target.value);
+                                    }}
+                                    style={{width:'400px'}}
+                                />
+                            </Container>
+                        </div>
+                    </Container>
+                    <Container>
+                        <h2>When is it?</h2>
+                        <div style={{ justifyContent: 'center', display: 'flex' }}>
+                            <Container sx={{ justifyContent: 'left', display: 'flex' }}>
+                            <DateTimePicker value={date} onChange={(date) => setDate(date)} />
+                            </Container>
+                        </div>
+                    </Container>
+                </div>
+                <Container>
+                        <div style={{ justifyContent: 'center', display: 'flex' }}>
+                            <Button variant='contained'>Next</Button>
+                        </div>
+                    </Container>
+                
+            </CustomTabPanel>
+        </Box>
+    );
 }
-
-export default CreateAMeet
