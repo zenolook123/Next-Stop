@@ -25,6 +25,7 @@ import CreateAMeet from '../CreateAMeet/CreateAMeet';
 
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import MeetDashboard from '../MeetDashboard/MeetDashboard';
 
 function App() {
   const dispatch = useDispatch();
@@ -73,13 +74,6 @@ function App() {
           >
             <InfoPage />
           </ProtectedRoute>
-
-          <Route
-            exact
-            path="/createameet"
-          >
-            <CreateAMeet />
-          </Route>
           
           <Route
             exact
@@ -121,6 +115,20 @@ function App() {
               // Otherwise, show the Landing page
               <LandingPage />
             }
+          </Route>
+
+          <Route
+            exact
+            path="/createameet"
+          >
+            <CreateAMeet />
+          </Route>
+
+          <Route
+            exact
+            path="/meetdashboard"
+          >
+            <MeetDashboard />
           </Route>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

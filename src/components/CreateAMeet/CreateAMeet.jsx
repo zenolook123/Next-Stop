@@ -9,11 +9,12 @@ import { Button, Container } from "@mui/material"
 import axios from "axios";
 import { useState } from "react";
 import { DateTimePicker } from '@mui/x-date-pickers';
-
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
-
     return (
         <div
             role="tabpanel"
@@ -30,13 +31,11 @@ function CustomTabPanel(props) {
         </div>
     );
 }
-
 CustomTabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.number.isRequired,
     value: PropTypes.number.isRequired,
 };
-
 function a11yProps(index) {
     return {
         id: `simple-tab-${index}`,
@@ -44,19 +43,31 @@ function a11yProps(index) {
     };
 }
 
+
+
 export default function CreateAMeet() {
 
+
+
+    const dispatch = useDispatch()
     const gifurl = 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921'
     const [image, setImageURL] = useState("https://icons.veryicon.com/png/o/miscellaneous/1em/add-image.png")
     const [address, setAddress] = useState('')
-    const [date, setDate] = useState()
+    const [date, setDate] = useState(undefined)
+    const [value, setValue] = React.useState(0);
+    const [description, setDescription] = useState('')
+    const [meetName, setMeetName] = useState('')
+    const member = useSelector(store => store.member);
+    const userID = useSelector(store => store.user.id)
+    //Value is for the tabs
     //When grabbing date its date.$d
+
+
     const handleSubmit = (event) => {
         setImageURL(gifurl)
         event.preventDefault();
         const formData = new FormData();
         formData.append('photo', event.target.photo.files[0]);
-
         axios.post('/api/upload', formData)
             .then((response) => {
                 const imageUrl = response.data.imageUrl;
@@ -66,12 +77,28 @@ export default function CreateAMeet() {
             .catch((error) => {
                 console.error('Error uploading file:', error);
             });
+        dispatch({
+            type: 'FETCH_MEMBERS'
+        })
     };
-    const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const handleNext = () => {
+            dispatch({
+                type: 'SET_CREATE_MEET',
+                payload: {
+                    imageURL: image,
+                    address: address,
+                    date: date.$d,
+                    description: description,
+                    meetName:meetName,
+                    creatorID:userID,
+                }
+            })
+    }
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -103,8 +130,21 @@ export default function CreateAMeet() {
                 <div>
                     <Container>
                         <div style={{ justifyContent: 'center', display: 'flex' }}>
-                            <Container sx={{ justifyContent: 'center', display: 'flex', backgroundColor: 'red' }}>
-                                List of members here
+                            <Container sx={{ justifyContent: 'center', display: 'flex' }}>
+                                {member.map((members) => {
+                                    const handleInvite = () => {
+                                        dispatch({
+                                            type: 'SEND_INVITE',
+                                            payload: members.id
+                                        })
+                                    }
+                                    return (
+                                        <>
+                                            <Button variant='contained' sx={{ height: '20px', margin: '20px' }} onClick={handleInvite} key={members.id}>Invite {members.username}</Button>
+                                        </>
+                                    )
+                                })}
+
                             </Container>
                         </div>
                     </Container>
@@ -112,10 +152,25 @@ export default function CreateAMeet() {
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
                 <div>
+                    <Container sx={{ justifyContent: 'center', display: 'flex', margin: '10px' }}>
+                        <h2 style={{ margin: '10px' }}>Choose a name for the meet</h2>
+
+                        <TextField
+                            id="outlined-multiline-flexible"
+                            label="Name"
+                            multiline
+                            Maxrows={4}
+                            style={{ width: '500px' }}
+                            value={meetName}
+                            onChange={(event) => {
+                                setMeetName(event.target.value);
+                            }}
+                        />
+                    </Container>
                     <Container>
-                        <h2>Where do you want to meet up?</h2>
-                        <div style={{ justifyContent: 'center', display: 'flex' }}>
+                        <div style={{ justifyContent: 'left', display: 'flex' }}>
                             <Container sx={{ justifyContent: 'left', display: 'flex' }}>
+                                <h2 style={{ margin: '20px' }}>Where do you want to meet up?</h2>
                                 <TextField
                                     id="outlined-controlled"
                                     label="Enter an address"
@@ -123,26 +178,49 @@ export default function CreateAMeet() {
                                     onChange={(event) => {
                                         setAddress(event.target.value);
                                     }}
-                                    style={{width:'400px'}}
+                                    style={{ width: '400px' }}
                                 />
                             </Container>
                         </div>
                     </Container>
                     <Container>
-                        <h2>When is it?</h2>
-                        <div style={{ justifyContent: 'center', display: 'flex' }}>
+                        <div style={{ justifyContent: 'left', display: 'flex' }}>
                             <Container sx={{ justifyContent: 'left', display: 'flex' }}>
-                            <DateTimePicker value={date} onChange={(date) => setDate(date)} />
+                                <h2 style={{ margin: '20px' }}>When is it?</h2>
+                                <DateTimePicker value={date} onChange={(date) => setDate(date)} />
                             </Container>
                         </div>
                     </Container>
+                    <Container>
+                        <div style={{ justifyContent: 'left', display: 'flex' }}>
+                            <Container sx={{ justifyContent: 'left', display: 'flex' }}>
+                                <h2 style={{ margin: '20px' }}>Give a brief description of the meet</h2>
+
+                                <TextField
+                                    id="outlined-multiline-flexible"
+                                    label="Description"
+                                    multiline
+                                    rows={4}
+                                    style={{ width: '500px' }}
+                                    value={description}
+                                    onChange={(event) => {
+                                        setDescription(event.target.value);
+                                    }}
+                                />
+                            </Container>
+                        </div>
+
+                    </Container>
                 </div>
                 <Container>
-                        <div style={{ justifyContent: 'center', display: 'flex' }}>
-                            <Button variant='contained'>Next</Button>
-                        </div>
-                    </Container>
-                
+                    <div style={{ justifyContent: 'center', display: 'flex' }}>
+                        <Link to="/meetdashboard" style={{ textDecoration: 'none', color: 'inherit' }}>
+                            <Button variant='contained' onClick={handleNext} style={{ margin: '30px' }}>To Meet Dashboard</Button>
+                        </Link>
+
+                    </div>
+                </Container>
+
             </CustomTabPanel>
         </Box>
     );
