@@ -1,6 +1,5 @@
 import React from 'react';
 import MyMeetCard from '../MyMeetCard/MyMeetCard';
-import { useDispatch } from 'react-redux';
 
 
 function MyMeets() {

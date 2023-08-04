@@ -205,7 +205,7 @@ export default function CreateAMeet() {
                         </div>
                 <Container>
                     <div style={{ justifyContent: 'center', display: 'flex' }}>
-                        <Link to="/meetdashboard" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <Link to="/mymeets" style={{ textDecoration: 'none', color: 'inherit' }}>
                             <Button variant='contained' onClick={handleNext} style={{ margin: '30px' }}>To Meet Dashboard</Button>
                         </Link>
                     </div>
