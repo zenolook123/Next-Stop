@@ -28,6 +28,7 @@ app.use('/api/user', userRouter);
 app.use('/', uploadRouter )
 app.use('/api/members', membersRouter)
 app.use('/api/meets', meetsRouter)
+
 // Serve static files
 app.use(express.static('build'));
 

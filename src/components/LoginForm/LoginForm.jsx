@@ -1,3 +1,4 @@
+import { Margin } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -26,8 +27,9 @@ function LoginForm() {
   }; // end login
 
   return (
+   <div style={{margin:'50px'}}>
     <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
+      <h2>Welcome Back!</h2>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
@@ -58,9 +60,10 @@ function LoginForm() {
         </label>
       </div>
       <div>
-        <Button type='submit' name='submit'>Log In</Button>
+        <Button type='submit' name='submit' variant='contained'>Log In</Button>
       </div>
     </form>
+    </div>
   );
 }
 

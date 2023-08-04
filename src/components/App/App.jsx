@@ -10,15 +10,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
+import MyMeets from '../MyMeets/MyMeets'
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import EditMeet from '../EditMeet/EditMeet'
 
 import './App.css';
 import CreateAMeet from '../CreateAMeet/CreateAMeet';
@@ -70,9 +69,9 @@ function App() {
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
-            path="/info"
+            path="/mymeets"
           >
-            <InfoPage />
+           <MyMeets />
           </ProtectedRoute>
           
           <Route
@@ -129,6 +128,15 @@ function App() {
             path="/meetdashboard"
           >
             <MeetDashboard />
+            
+          </Route>
+
+          <Route
+            exact
+            path="/editmeet/:id"
+          >
+            <EditMeet />
+            
           </Route>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

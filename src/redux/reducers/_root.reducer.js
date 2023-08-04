@@ -2,7 +2,9 @@ import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
 import member from './members.reducer'
-
+import myMeetReducer from './myMeet.reducer';
+import editMeetReducer from './editMeet.reducer';
+import allMeetReducer from './allMeet.reducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -12,7 +14,10 @@ import member from './members.reducer'
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user,
-  member // will have an id and username if someone is logged in
+  member,
+  myMeetReducer,
+  editMeetReducer,
+  allMeetReducer
 });
 
 export default rootReducer;

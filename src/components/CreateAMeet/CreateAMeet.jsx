@@ -59,6 +59,7 @@ export default function CreateAMeet() {
     const [meetName, setMeetName] = useState('')
     const member = useSelector(store => store.member);
     const userID = useSelector(store => store.user.id)
+    const user = useSelector(store => store.user)
     //Value is for the tabs
     //When grabbing date its date.$d
 
@@ -94,7 +95,7 @@ export default function CreateAMeet() {
                     address: address,
                     date: date.$d,
                     description: description,
-                    meetName:meetName,
+                    meetName:`${meetName}, ran by ${user.username}!`,
                     creatorID:userID,
                 }
             })
@@ -111,16 +112,14 @@ export default function CreateAMeet() {
             </Box>
             <CustomTabPanel value={value} index={0}>
                 <div>
+                    <form encType='multipart/form-data' onSubmit={handleSubmit} style={{display:'flex',justifyContent:'center'}}>
+                                    <input type="file" name='photo' style={{fontSize:'1rem'}}/>
+                                    <button type="submit" style={{fontSize:'1rem'}}>Upload Photo</button>
+                                </form>
                     <Container>
                         <div style={{ justifyContent: 'center', display: 'flex' }}>
-                            <Container sx={{ justifyContent: 'center', display: 'flex' }}>
-                                <form encType='multipart/form-data' onSubmit={handleSubmit}>
-                                    <input type="file" name='photo' />
-                                    <button type="submit">Upload Photo</button>
-                                </form>
-                            </Container>
                             <Container sx={{ display: 'flex', justifyContent: 'center' }}>
-                                <img src={image} style={{ maxHeight: '500px', maxWidth: '500px', display: 'inline-flex' }}></img>
+                                <img src={image} style={{ maxHeight: '300px', maxWidth: '300px', display: 'inline-flex' }}></img>
                             </Container>
                         </div>
                     </Container>
@@ -151,23 +150,22 @@ export default function CreateAMeet() {
                 </div>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
-                <div>
-                    <Container sx={{ justifyContent: 'center', display: 'flex', margin: '10px' }}>
-                        <h2 style={{ margin: '10px' }}>Choose a name for the meet</h2>
-
+                <div style={{ justifyContent: 'left', display: 'flex' }}>
+                    <Container sx={{ justifyContent: 'left', display: 'flex' }}>
+                        <h2 style={{ margin: '20px' }}>Choose a name for the meet</h2>
                         <TextField
                             id="outlined-multiline-flexible"
                             label="Name"
                             multiline
                             Maxrows={4}
-                            style={{ width: '500px' }}
+                            style={{ width: '500px'}}
                             value={meetName}
                             onChange={(event) => {
                                 setMeetName(event.target.value);
                             }}
                         />
                     </Container>
-                    <Container>
+                    </div>
                         <div style={{ justifyContent: 'left', display: 'flex' }}>
                             <Container sx={{ justifyContent: 'left', display: 'flex' }}>
                                 <h2 style={{ margin: '20px' }}>Where do you want to meet up?</h2>
@@ -182,16 +180,12 @@ export default function CreateAMeet() {
                                 />
                             </Container>
                         </div>
-                    </Container>
-                    <Container>
                         <div style={{ justifyContent: 'left', display: 'flex' }}>
                             <Container sx={{ justifyContent: 'left', display: 'flex' }}>
                                 <h2 style={{ margin: '20px' }}>When is it?</h2>
                                 <DateTimePicker value={date} onChange={(date) => setDate(date)} />
                             </Container>
                         </div>
-                    </Container>
-                    <Container>
                         <div style={{ justifyContent: 'left', display: 'flex' }}>
                             <Container sx={{ justifyContent: 'left', display: 'flex' }}>
                                 <h2 style={{ margin: '20px' }}>Give a brief description of the meet</h2>
@@ -209,15 +203,11 @@ export default function CreateAMeet() {
                                 />
                             </Container>
                         </div>
-
-                    </Container>
-                </div>
                 <Container>
                     <div style={{ justifyContent: 'center', display: 'flex' }}>
                         <Link to="/meetdashboard" style={{ textDecoration: 'none', color: 'inherit' }}>
                             <Button variant='contained' onClick={handleNext} style={{ margin: '30px' }}>To Meet Dashboard</Button>
                         </Link>
-
                     </div>
                 </Container>
 

@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,6 +21,7 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
+    <div style={{margin:'50px'}}>
     <form className="formPanel" onSubmit={registerUser}>
       <h2>Register User</h2>
       {errors.registrationMessage && (
@@ -52,9 +54,10 @@ function RegisterForm() {
         </label>
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
+        <Button type='submit' name="submit" value="register" variant='contained'>Register</Button>
       </div>
     </form>
+    </div>
   );
 }
 
