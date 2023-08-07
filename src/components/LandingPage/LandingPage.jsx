@@ -12,7 +12,7 @@ function LandingPage() {
 
 
   const checkLogged = () => {
-    return user.id ? "/meetdashboard" : "/register";
+    return user.id ? "/meetdashboard" : "/registration";
   }
 
   return (<>
