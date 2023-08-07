@@ -12,6 +12,7 @@ const userRouter = require('./routes/user.router');
 const uploadRouter = require('./routes/upload.router')
 const membersRouter = require('./routes/members.router')
 const meetsRouter = require('./routes/meets.router')
+const carRouter = require('./routes/car.router')
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,6 +29,7 @@ app.use('/api/user', userRouter);
 app.use('/', uploadRouter )
 app.use('/api/members', membersRouter)
 app.use('/api/meets', meetsRouter)
+app.use('/api/cars', carRouter)
 
 // Serve static files
 app.use(express.static('build'));

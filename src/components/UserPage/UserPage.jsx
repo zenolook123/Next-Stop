@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import { Container, Typography, Button, TextField, Grid, Card, CardContent } from '@mui/material';
 
 function UserPage() {
