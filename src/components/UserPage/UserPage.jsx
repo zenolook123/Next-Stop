@@ -4,6 +4,7 @@ import { Container, Typography, Button, TextField, Grid, Card, CardContent } fro
 
 function UserPage() {
   const user = useSelector((store) => store.user);
+  const myCars = useSelector((store) => store.myCars);
 
   const handleAddCar = () => {
     // Add logic to open the "Add Car" editing area
@@ -43,16 +44,25 @@ function UserPage() {
             <Grid item xs={12} sm={6}>
               <Card>
                 <CardContent>
-                  List car
+                <TextField id="outlined-basic" label="Year" variant="outlined" style={{margin:'10px'}} />
+                <TextField id="outlined-basic" label="Make" variant="outlined" style={{margin:'10px'}}/>
+                <TextField id="outlined-basic" label="Model" variant="outlined" style={{margin:'10px'}}/>
                 </CardContent>
               </Card>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Button variant="contained" onClick={handleAddCar}>
+              <Card>
+                <CardContent>
+                Mapped my car here
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Button variant="contained" onClick={handleAddCar} style={{margin:'10px'}}>
                 Add a Car
               </Button>
             </Grid>
-          </Grid>
         </CardContent>
       </Card>
       <Card style={{ marginTop: '20px' }}>

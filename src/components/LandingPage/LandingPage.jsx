@@ -21,9 +21,9 @@ function LandingPage() {
         <h1>Are you tired of unorganized car meets?</h1>
         <h2>Are you looking to discover exciting car meets but struggling to locate them?
           Do you find yourself always scouring Snapchat, Discord, or Facebook for the latest updates?</h2>
-        <Link to={checkLogged} style={{ textDecoration: 'none', color: 'inherit' }}>
+        {/* <Link to={checkLogged} style={{ textDecoration: 'none', color: 'inherit' }}>
           <Button variant='contained' style={{ width: '200px', height: '50px' }}>Find Meets Near You</Button>
-        </Link>
+        </Link> */}
       </div>
         <img src='../images/NSLogoNoBG.png' alt='Next Stop Logo' style={{ height: '400px', width: '600px', marginTop:'10px'}} />
     </Container>
