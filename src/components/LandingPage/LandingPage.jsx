@@ -27,6 +27,7 @@ function LandingPage() {
       </div>
         <img src='../images/NSLogoNoBG.png' alt='Next Stop Logo' style={{ height: '400px', width: '600px', marginTop:'10px'}} />
     </Container>
+    <h1 style={{display:'flex', justifyContent:'center'}}>Find meets near you!</h1>
     <Link to={checkLogged} style={{ textDecoration: 'none', color: 'inherit' }}>
     <AllMeetCard />
     </Link>

@@ -22,8 +22,8 @@ function RegisterForm() {
 
   return (
     <div style={{margin:'50px'}}>
-    <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
+    <form className="formPanel" onSubmit={registerUser} style={{width:'550px', height:'300px'}}>
+      <h1>Register User</h1>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
@@ -31,30 +31,32 @@ function RegisterForm() {
       )}
       <div>
         <label htmlFor="username">
-          Username:
+        <span style={{fontSize:'1.25rem'}}>Username:</span>
           <input
             type="text"
             name="username"
             value={username}
             required
             onChange={(event) => setUsername(event.target.value)}
+            style={{height:'25px', width:'200px'}}
           />
         </label>
       </div>
       <div>
         <label htmlFor="password">
-          Password:
+          <span style={{fontSize:'1.25rem'}}>Password:</span>
           <input
             type="password"
             name="password"
             value={password}
             required
             onChange={(event) => setPassword(event.target.value)}
+            style={{height:'25px', width:'200px'}}
           />
         </label>
       </div>
       <div>
-        <Button type='submit' name="submit" value="register" variant='contained'>Register</Button>
+        <Button type='submit' name="submit" value="register" variant='contained' style={{marginTop:'30px'}}>Register</Button>
       </div>
     </form>
     </div>
