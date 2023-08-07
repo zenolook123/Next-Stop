@@ -6,10 +6,11 @@ import {
   Switch,
 } from 'react-router-dom';
 
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import theme from '../../Theme/Theme';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
@@ -27,6 +28,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import MeetDashboard from '../MeetDashboard/MeetDashboard';
 
 function App() {
+  
   const dispatch = useDispatch();
 
   const user = useSelector(store => store.user);
@@ -37,6 +39,8 @@ function App() {
 
   return (
 <>
+<ThemeProvider theme={theme}>
+  <CssBaseline>
 <LocalizationProvider dateAdapter={AdapterDayjs}>
     <Router>
       <div>
@@ -136,10 +140,11 @@ function App() {
             <h1>No Matches</h1>
           </Route>
         </Switch>
-        <Footer />
       </div>
     </Router>
     </LocalizationProvider>
+    </CssBaseline>
+    </ThemeProvider>
     </>
   );
 }

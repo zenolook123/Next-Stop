@@ -7,6 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
+import LogOutButton from '../LogOutButton/LogOutButton';
 export default function Nav() {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch()
@@ -17,11 +18,6 @@ const handleDashClick = () => {
   })
 }
 
-const handleMyClick = () => {
-  dispatch({
-    type:'FETCH_MY_MEETS'
-  })
-}
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -43,11 +39,12 @@ const handleMyClick = () => {
           </>
           ) : (
             <>
+            <LogOutButton/>
               <Link to="/user" style={{ textDecoration: 'none', color: 'inherit' }}>
-                <Button color="inherit">Home</Button>
+                <Button color="inherit">Your Profile</Button>
               </Link>
               <Link to="mymeets" style={{ textDecoration: 'none', color: 'inherit' }}>
-                <Button color="inherit" onClick={handleMyClick}>My Meets</Button>
+                <Button color="inherit">My Meets</Button>
               </Link>
               <Link to="/createameet" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <Button color="inherit">Create a Meet</Button>

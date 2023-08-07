@@ -1,14 +1,11 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useEffect } from 'react';
-function AllMeetCard() {
+function AllMeetsCardNoLink() {
   const allMeets = useSelector((store) => store.allMeetReducer);
  const dispatch = useDispatch()
  
@@ -18,7 +15,8 @@ function AllMeetCard() {
       });
   }, []);
 
-  return (
+
+return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px', justifyContent: 'center', margin: '30px' }}>
       {allMeets.map((meet) => (
         <Card
@@ -37,14 +35,10 @@ function AllMeetCard() {
               {meet.meetup_description}
             </Typography>
           </CardContent>
-          <CardActions>
-            <Button size="small">Invite To Meet</Button>
-            <Button size="small">Attend</Button>
-          </CardActions>
         </Card>
       ))}
     </div>
   );
  }  
 
-export default AllMeetCard;
+export default AllMeetsCardNoLink;

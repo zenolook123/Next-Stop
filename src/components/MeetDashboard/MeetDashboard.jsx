@@ -5,13 +5,11 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useDispatch } from 'react-redux';
+import MyMeetCard from '../MyMeetCard/MyMeetCard';
 import AllMeetCard from '../AllMeetsCard/AllMeetsCard';
 export default function MeetDashboard() {
 
 
-
-    
   return (
     <>
       <CssBaseline />
@@ -49,9 +47,10 @@ export default function MeetDashboard() {
             </Stack>
           </Container>
         </Box>
-        <Container sx={{ py: 8 }} maxWidth="md">
-            <AllMeetCard />
-        </Container>
+        <h2>Here's a list of all meets in your area</h2>
+        <AllMeetCard />
+        <h2>Here are meets you've created or are attending</h2>
+        <MyMeetCard />
       </main>
       </>
   );

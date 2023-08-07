@@ -1,28 +1,36 @@
 import './LandingPage.css';
 
 // CUSTOM COMPONENTS
-import { Button } from '@mui/material';
+import { Button, Container } from '@mui/material';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { useSelector } from 'react-redux';
+import AllMeetCard from '../AllMeetsCard/AllMeetsCard';
 
 function LandingPage() {
-  return (
-    <div className="container">
-      <h1 style={{margin:'55px'}}>Are you tired of unorganized car meets?</h1>
-      <div className="grid">
-        <div className="grid-col grid-col_8">
-          <h3 style={{margin:'50px'}}>
-            Have you ever wanted to go to car meets but haven't been able to find them?
-            Are you someone who's
-            constantly on Snapchat/Discord/Facebook trying to keep up to date with the latest information?
-          </h3>
 
-      
-          <h1 style={{margin:'50px'}}>
-            Next Stop is your one stop solution to getting all your car meet info in one place!
-          </h1>
-          <Button variant='contained' style={{margin:'50px'}}>Find Meets Near You</Button>
-        </div>
+  const user = useSelector(store => store.user);
+
+
+  const checkLogged = () => {
+    return user.id ? "/meetdashboard" : "/register";
+  }
+
+  return (<>
+    <Container sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+      <div style={{ flex: '1' }}>
+        <h1>Are you tired of unorganized car meets?</h1>
+        <h2>Are you looking to discover exciting car meets but struggling to locate them?
+          Do you find yourself always scouring Snapchat, Discord, or Facebook for the latest updates?</h2>
+        <Link to={checkLogged} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Button variant='contained' style={{ width: '200px', height: '50px' }}>Find Meets Near You</Button>
+        </Link>
       </div>
-    </div>
+        <img src='../images/NSLogoNoBG.png' alt='Next Stop Logo' style={{ height: '400px', width: '600px', marginTop:'10px'}} />
+    </Container>
+    <Link to={checkLogged} style={{ textDecoration: 'none', color: 'inherit' }}>
+    <AllMeetCard />
+    </Link>
+    </>
   );
 }
 

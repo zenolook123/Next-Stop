@@ -19,44 +19,43 @@ function MyMeetCard() {
     })
   }
 
-  useEffect(() => {
-    dispatch({
-        type: "FETCH_MY_MEETS",
-      });
-  }, []);
+    useEffect(() => {
+      dispatch({
+          type: "FETCH_MY_MEETS",
+        });
+    }, []);
 
-  return (
+
+    return (
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px', justifyContent: 'center', margin: '30px'}}>
+        {myMeets.map((meet) => (
+          <Card
+            key={meet.id}
+            sx={{
+              padding: '10px',
+              boxSizing: 'border-box',
+            }}
+          >
+            <CardMedia component="img" alt="No Picture Set" height="200" image={meet.meetup_picture} />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {meet.meetup_name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {meet.meetup_description}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small">Invite To Meet</Button>
+              <Link to={`editmeet/${meet.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Button size="small" onClick={() => handleClick(meet.id)}>Edit Meet</Button>
+              </Link>
+            </CardActions>
+          </Card>
+        ))}
+      </div>
+    );
     
-    <div style={{ display: 'flex', justifyContent: 'center', margin:'30px' }}>
-      {myMeets.map((meet) => (
-        <Card
-          key={meet.id}
-          sx={{
-            maxWidth: 300,
-            margin: '20px',
-            padding: '10px',
-            boxSizing: 'border-box', 
-          }}
-        >
-          <CardMedia component="img" alt="No Picture Set" height="200" image={meet.meetup_picture} />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {meet.meetup_name}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {meet.meetup_description}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small">Invite To Meet</Button>
-            <Link to={`editmeet/${meet.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Button size="small" onClick={handleClick(meet.id)}>Edit Meet</Button>
-            </Link>
-          </CardActions>
-        </Card>
-      ))}
-    </div>
-  );
 }
 
 export default MyMeetCard;

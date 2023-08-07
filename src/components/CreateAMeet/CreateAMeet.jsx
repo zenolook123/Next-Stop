@@ -11,8 +11,6 @@ import { useState } from "react";
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -46,7 +44,6 @@ function a11yProps(index) {
 
 
 export default function CreateAMeet() {
-
 
 
     const dispatch = useDispatch()
@@ -99,6 +96,9 @@ export default function CreateAMeet() {
                     creatorID:userID,
                 }
             })
+            dispatch({
+                type: "FETCH_MY_MEETS",
+              });
     }
 
     return (
@@ -205,9 +205,7 @@ export default function CreateAMeet() {
                         </div>
                 <Container>
                     <div style={{ justifyContent: 'center', display: 'flex' }}>
-                        <Link to="/mymeets" style={{ textDecoration: 'none', color: 'inherit' }}>
                             <Button variant='contained' onClick={handleNext} style={{ margin: '30px' }}>To Meet Dashboard</Button>
-                        </Link>
                     </div>
                 </Container>
 
