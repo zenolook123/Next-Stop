@@ -21,10 +21,10 @@ router.post('/register', (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
 
-  const queryText = `INSERT INTO "user" (username, password)
-    VALUES ($1, $2) RETURNING id`;
+  const queryText = `INSERT INTO "user" (username, password, fullname, styles)
+    VALUES ($1, $2, $3, $4) RETURNING id`;
   pool
-    .query(queryText, [username, password])
+    .query(queryText, [username, password, 'Not Set', 'Not Set'])
     .then(() => res.sendStatus(201))
     .catch((err) => {
       console.log('User registration failed: ', err);
@@ -45,6 +45,24 @@ router.post('/logout', (req, res) => {
   // Use passport's built-in method to log out the user
   req.logout();
   res.sendStatus(200);
+});
+
+
+router.put('/update/:id', (req, res, next) => {
+  const userId = req.params.id;
+  const fullname = req.body.fullname;
+  const styles = req.body.styles;
+
+  const queryText = `UPDATE "user"
+    SET fullname = $1, styles = $2
+    WHERE id = $3`;
+  pool
+    .query(queryText, [fullname, styles, userId])
+    .then(() => res.sendStatus(200))
+    .catch((err) => {
+      console.log('User update failed: ', err);
+      res.sendStatus(500);
+    });
 });
 
 module.exports = router;

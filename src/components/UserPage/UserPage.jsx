@@ -16,11 +16,15 @@ function UserPage() {
   const [selectedYear, setSelectedYear] = useState('2015');
   const [selectedModel, setSelectedModel] = useState('WRX');
 
+  const [modificationText, setModification] = useState('N/A');
+  const [modifyingCarID, setCarToMod] = useState(0)
+
   const ymmObject = {
     year: selectedYear,
     make: selectedMake,
     model: selectedModel
   }
+
 
   const handleMakeSelect = (event, value) => {
     setSelectedMake(value);
@@ -31,6 +35,9 @@ function UserPage() {
   const handleModelSelect = (event, value) => {
     setSelectedModel(value)
   };
+  const handleModificationText = (event, value ) => {
+    setModification(event.target.value)
+  }
 
   const selectedModels = Models[`${selectedMake}`];
 
@@ -38,25 +45,35 @@ function UserPage() {
     dispatch({
       type: 'ADD_CAR',
       payload: ymmObject,
-      id:user.id
-    })  
+      id: user.id
+    })
+
+    dispatch({
+      type: "FETCH_CARS",
+      payload: user.id
+    })
+
   };
 
-  const handleAddModification = () => {
-
-
+  const handleAddMod = () => {
+    dispatch({
+      type: 'ADD_MOD',
+      payload: modificationText,
+      id: modifyingCarID
+    })
   };
+
 
   useEffect(() => {
     dispatch({
-        type: "FETCH_CARS",
-        payload:user.id
-      });
+      type: "FETCH_CARS",
+      payload: user.id
+    });
   }, []);
 
   return (
     <>
-      <Container maxWidth="md" style={{ marginTop: '30px' }}>
+      <Container maxWidth="md" style={{ marginTop: '30px', paddingBottom: '400px' }}>
         <Typography variant="h4" gutterBottom>
           Welcome, {user.username}!
         </Typography>
@@ -138,13 +155,31 @@ function UserPage() {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <Card>
+                <CardContent>
+                  <Autocomplete
+                    disablePortal
+                    id="combo-box-demo"
+                    options={myCars}
+                    getOptionLabel={(car) => `${car.year} ${car.make} ${car.model}`}
+                    sx={{ width: 300 }}
+                    renderInput={(params) => <TextField {...params} label="Choose from your vehicles" />}
+                    onChange={(event, value) => setCarToMod(value.id)}
+                  />
+                </CardContent>
                   <CardContent>
-                    Somehow Link cars to mods
+                    <TextField
+                      id="outlined-multiline-flexible"
+                      label="Enter Modifications"
+                      multiline
+                      rows={4}
+                      style={{width:'300px'}}
+                      onChange={handleModificationText}
+                    />
                   </CardContent>
                 </Card>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Button variant="contained" onClick={handleAddModification}>
+                <Button variant="contained" onClick={handleAddMod}>
                   Add Modification
                 </Button>
               </Grid>

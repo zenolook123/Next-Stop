@@ -10,7 +10,6 @@ router.get('/mycars/:id', (req, res) => {
     .query(queryText, [req.user.id])
     .then(result => {
         res.send(result.rows)
-        console.log('RESULT ROWS IS',result.rows)
     })
     .catch((err) => {
       console.log('Grab Meets Failed: ', err);
@@ -20,15 +19,35 @@ router.get('/mycars/:id', (req, res) => {
 
 router.post('/mycars', (req,res) => {
     console.log('In router post', req.body)
-    const queryText = `INSERT INTO "car" (make, model, year, user_id)
-    VALUES ($1, $2, $3, $4) RETURNING id`;
+    const queryText = `INSERT INTO "car" (make, model, year, user_id, mods)
+    VALUES ($1, $2, $3, $4, $5) RETURNING id`;
     pool
-    .query(queryText,[req.body.make, req.body.model, req.body.year, req.user.id])
+    .query(queryText,[req.body.make, req.body.model, req.body.year, req.user.id, 'N/A'])
     .then(() => res.sendStatus(201))
     .catch((err) => {
       console.log('User registration failed: ', err);
       res.sendStatus(500);
     });
 })
+
+router.put('/mycars/mods/:id', (req, res) => {
+  const carId = req.params.id;
+  const newMods = req.body;
+  console.log("newmods is", newMods)
+  console.log("carID is", carId)
+  const queryText = `UPDATE "car"
+    SET mods = $1
+    WHERE id = $2`;
+  
+  pool
+    .query(queryText, [newMods, carId])
+    .then(() => res.sendStatus(200))
+    .catch((err) => {
+      console.log('Car mods update failed: ', err);
+      res.sendStatus(500);
+    });
+});
+
+
 
 module.exports = router;

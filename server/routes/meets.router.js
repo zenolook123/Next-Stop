@@ -46,7 +46,6 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req,res) => {
-    console.log('In router post', req.body)
     const queryText = `INSERT INTO "meetups" (meetup_name, meetup_description, meetup_picture, meet_address, meet_date, meet_type, creator_id)
     VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`;
     pool
@@ -61,7 +60,6 @@ router.post('/', (req,res) => {
 router.delete('/:id', (req, res) => {
   const meetupId = req.params.id;
   const queryText = `DELETE FROM "meetups" WHERE id = $1`;
-  console.log(meetupId)
   pool
     .query(queryText, [meetupId])
     .then(() => res.sendStatus(204))

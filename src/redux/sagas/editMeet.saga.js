@@ -3,6 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 
 function* fetchEditMeet(action) {
+  console.log(action.payload)
     try {
       const response = yield axios.get(`/api/meets/${action.payload}`);
       yield put({ type: 'SET_EDIT_MEET', payload: response.data });
