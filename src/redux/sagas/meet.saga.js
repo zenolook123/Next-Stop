@@ -17,7 +17,6 @@ function* setCreateMeets(action){
     try {
         console.log(action.payload)
         const response = yield axios.post('/api/meets', action.payload);
-        console.log(response)
         yield put ({ type:'FETCH_MEETS' })
     }
     catch(error) {

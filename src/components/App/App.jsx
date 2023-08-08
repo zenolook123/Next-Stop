@@ -26,6 +26,7 @@ import CreateAMeet from '../CreateAMeet/CreateAMeet';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import MeetDashboard from '../MeetDashboard/MeetDashboard';
+import InvitesPage from '../InvitesPage/InvitesPage';
 
 function App() {
   
@@ -125,6 +126,13 @@ function App() {
             path="/meetdashboard"
           >
             <MeetDashboard />
+            
+          </Route>
+          <Route
+            exact
+            path="/notifications"
+          >
+            <InvitesPage />
             
           </Route>
 
