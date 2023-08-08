@@ -6,7 +6,6 @@ import Year from './Year';
 import Makes from './Make'
 import Models from './Model';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
 
 function UserPage() {
   const user = useSelector((store) => store.user);
@@ -38,16 +37,9 @@ function UserPage() {
   const handleAddCar = () => {
     dispatch({
       type: 'ADD_CAR',
-      payload: ymmObject
-    })
-
-    axios.post('/api/cars/mycars', ymmObject)
-    .then((response) => {
-        console.log('ymmObject is', ymmObject);
-    })
-    .catch((error) => {
-        console.error('Error uploading file:', error);
-    });
+      payload: ymmObject,
+      id:user.id
+    })  
   };
 
   const handleAddModification = () => {
