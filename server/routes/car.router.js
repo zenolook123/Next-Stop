@@ -4,12 +4,13 @@ const pool = require('../modules/pool');
 
 const router = express.Router();
 
-router.get('/mycars', (req, res) => {
+router.get('/mycars/:id', (req, res) => {
     const queryText = `SELECT * FROM "car" where "user_id" = $1`;
   pool
     .query(queryText, [req.user.id])
     .then(result => {
         res.send(result.rows)
+        console.log('RESULT ROWS IS',result.rows)
     })
     .catch((err) => {
       console.log('Grab Meets Failed: ', err);
@@ -29,3 +30,5 @@ router.post('/mycars', (req,res) => {
       res.sendStatus(500);
     });
 })
+
+module.exports = router;

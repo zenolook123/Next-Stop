@@ -6,6 +6,7 @@ import memberSaga from './members.saga'
 import meetSaga from './meet.saga';
 import editMeetSaga from './editMeet.saga';
 import allMeetSaga from './allMeet.saga'
+import addCarSaga from './addCar.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -22,6 +23,7 @@ export default function* rootSaga() {
     memberSaga(),
     meetSaga(),
     editMeetSaga(),
-    allMeetSaga()
+    allMeetSaga(),
+    addCarSaga()
   ]);
 }
