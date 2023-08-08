@@ -16,9 +16,19 @@ function AllMeetCard() {
         type: "FETCH_ALL_MEETS",
       });
   }, []);
+ 
+  const sendInvite = (meetID,memberID) => {
+    dispatch({
+      type:'SEND_INVITE',
+      payload: {
+        meetID,
+        memberID
+      }
+    })
+  }
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px', justifyContent: 'center', margin: '30px' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '40px', margin: '30px' }}>
       {allMeets.map((meet) => (
         <Card
           key={meet.id}

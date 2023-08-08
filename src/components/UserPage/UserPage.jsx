@@ -35,7 +35,7 @@ function UserPage() {
   const handleModelSelect = (event, value) => {
     setSelectedModel(value)
   };
-  const handleModificationText = (event, value ) => {
+  const handleModificationText = (event, value) => {
     setModification(event.target.value)
   }
 
@@ -129,16 +129,16 @@ function UserPage() {
                 </Card>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Card>
-                  <CardContent>
-                    {myCars.map((car) => (
+                {myCars.map((car) => (
+                  <Card style={{ margin: "10px" }}>
+                    <CardContent style={{ backgroundColor: '#fafafa' }}>
                       <div key={car.id}>
-                        <h3 style={{margin:'2px'}}>{car.year} {car.make} {car.model}</h3>
-                        <h6 style={{margin:'2px'}}>Mods:{car.mods}</h6>
+                        <h3 style={{ margin: '2px' }}>{car.year} {car.make} {car.model}</h3>
+                        <h6 style={{ margin: '2px' }}>Mods:{car.mods}</h6>
                       </div>
-                    ))}
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                ))}
               </Grid>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -148,7 +148,7 @@ function UserPage() {
             </Grid>
           </CardContent>
         </Card>
-        <Card style={{ marginTop: '20px' }}>
+        <Card style={{ marginTop: '40px' }}>
           <CardContent>
             <Typography variant="h5" gutterBottom>
               Car Modifications
@@ -156,24 +156,24 @@ function UserPage() {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <Card>
-                <CardContent>
-                  <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    options={myCars}
-                    getOptionLabel={(car) => `${car.year} ${car.make} ${car.model}`}
-                    sx={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Choose from your vehicles" />}
-                    onChange={(event, value) => setCarToMod(value.id)}
-                  />
-                </CardContent>
+                  <CardContent>
+                    <Autocomplete
+                      disablePortal
+                      id="combo-box-demo"
+                      options={myCars}
+                      getOptionLabel={(car) => `${car.year} ${car.make} ${car.model}`}
+                      sx={{ width: 300 }}
+                      renderInput={(params) => <TextField {...params} label="Choose from your vehicles" />}
+                      onChange={(event, value) => setCarToMod(value.id)}
+                    />
+                  </CardContent>
                   <CardContent>
                     <TextField
                       id="outlined-multiline-flexible"
                       label="Enter Modifications"
                       multiline
                       rows={4}
-                      style={{width:'300px'}}
+                      style={{ width: '300px' }}
                       onChange={handleModificationText}
                     />
                   </CardContent>

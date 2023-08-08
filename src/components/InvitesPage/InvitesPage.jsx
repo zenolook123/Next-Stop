@@ -2,7 +2,7 @@ import { Button, Container } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-
+//NEED TO IMPLEMENT A MEETS PAGE WHERE YOU CAN VIEW THE MEET EXPANDED
 
 function InvitesPage() {
     const invites = useSelector(store => store.inviteReducer);

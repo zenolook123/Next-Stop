@@ -16,7 +16,7 @@ function LandingPage() {
   }
 
   return (<>
-    <Container sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+    <Container sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft:'250px' }}>
       <div style={{ flex: '1' }}>
         <h1>Are you tired of unorganized car meets?</h1>
         <h2>Are you looking to discover exciting car meets but struggling to locate them?
@@ -27,10 +27,12 @@ function LandingPage() {
       </div>
         <img src='../images/NSLogoNoBG.png' alt='Next Stop Logo' style={{ height: '400px', width: '600px', marginTop:'10px'}} />
     </Container>
+    <Container sx={{paddingBottom:'20px'}}>
     <h1 style={{display:'flex', justifyContent:'center'}}>Find meets near you!</h1>
     <Link to={checkLogged} style={{ textDecoration: 'none', color: 'inherit' }}>
     <AllMeetCard />
     </Link>
+    </Container>
     </>
   );
 }

@@ -27,7 +27,7 @@ function MyMeetCard() {
 
 
     return (
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px', justifyContent: 'center', margin: '30px'}}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '40px', justifyContent: 'center', margin: '15px', marginLeft:'25px'}}>
         {myMeets.map((meet) => (
           <Card
             key={meet.id}
