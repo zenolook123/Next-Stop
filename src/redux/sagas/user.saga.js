@@ -24,6 +24,10 @@ function* fetchUser() {
   }
 }
 
+function* editUser() {
+  
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
 }

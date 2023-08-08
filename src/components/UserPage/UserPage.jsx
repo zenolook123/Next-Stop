@@ -77,7 +77,7 @@ function UserPage() {
         <Typography variant="h4" gutterBottom>
           Welcome, {user.username}!
         </Typography>
-        <Card>
+        {/* <Card>
           <CardContent>
             <Typography variant="h5" gutterBottom>
               Update Profile
@@ -90,7 +90,7 @@ function UserPage() {
               </Button>
             </form>
           </CardContent>
-        </Card>
+        </Card> */}
 
         <Card style={{ marginTop: '20px' }}>
           <CardContent>
@@ -133,7 +133,8 @@ function UserPage() {
                   <CardContent>
                     {myCars.map((car) => (
                       <div key={car.id}>
-                        <p>{car.year} {car.make} {car.model}</p>
+                        <h3 style={{margin:'2px'}}>{car.year} {car.make} {car.model}</h3>
+                        <h6 style={{margin:'2px'}}>Mods:{car.mods}</h6>
                       </div>
                     ))}
                   </CardContent>
@@ -182,6 +183,7 @@ function UserPage() {
                 <Button variant="contained" onClick={handleAddMod}>
                   Add Modification
                 </Button>
+                <h2>WHEN ADDING MODS IT WILL ERASE PREVIOUS ENTRIES</h2>
               </Grid>
             </Grid>
           </CardContent>

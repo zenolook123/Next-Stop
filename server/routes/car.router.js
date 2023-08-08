@@ -32,9 +32,7 @@ router.post('/mycars', (req,res) => {
 
 router.put('/mycars/mods/:id', (req, res) => {
   const carId = req.params.id;
-  const newMods = req.body;
-  console.log("newmods is", newMods)
-  console.log("carID is", carId)
+  const newMods = req.body.mods;
   const queryText = `UPDATE "car"
     SET mods = $1
     WHERE id = $2`;
