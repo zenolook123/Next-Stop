@@ -31,10 +31,11 @@ function* declineInvite(action){
         console.log("error declining invite", error)
     }
 }
-
 function* InviteSaga() {
   yield takeLatest('FETCH_INVITES', fetchInvites);
   yield takeLatest('SEND_INVITE', sendInvite)
+  yield takeLatest('ACCEPT_INVITE', acceptInvite)
+  yield takeLatest('DECLINE_INVITE', declineInvite)
 }
 
 export default InviteSaga;

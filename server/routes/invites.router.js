@@ -20,10 +20,10 @@ router.get('/', (req, res) => {
 
 
 router.post('/', (req,res) => {
-    const queryText = `INSERT INTO "invites" (meetup_id, user_id)
-    VALUES ($1, $2) RETURNING id`;
+    const queryText = `INSERT INTO "invites" (meetup_id, user_id, attending)
+    VALUES ($1, $2, $3)`;
     pool
-    .query(queryText, [req.body.meetupID, req.body.inviteID])
+    .query(queryText, [req.body.meetupID, req.body.inviteID, 0])
     .then(() => res.sendStatus(201))
     .catch((err) => {
       console.log('User registration failed: ', err);
@@ -34,7 +34,7 @@ router.post('/', (req,res) => {
 router.delete('/', (req, res) => {
   const queryText = `DELETE FROM "invites" WHERE id = $1`;
   pool
-    .query(queryText, [meetupId])
+    .query(queryText, [req.body.meetupId])
     .then(() => res.sendStatus(204))
     .catch((err) => {
       console.log('Delete meetup failed: ', err);

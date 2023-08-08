@@ -106,7 +106,6 @@ export default function CreateAMeet() {
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" variant='fullWidth'>
                     <Tab label="Choose a photo for the meet" {...a11yProps(0)} />
-                    <Tab label="Invite Members" {...a11yProps(1)} />
                     <Tab label="When/Where?" {...a11yProps(2)} />
                 </Tabs>
             </Box>
@@ -125,7 +124,7 @@ export default function CreateAMeet() {
                     </Container>
                 </div>
             </CustomTabPanel>
-            <CustomTabPanel value={value} index={1}>
+            {/* <CustomTabPanel value={value} index={1}>
                 <div>
                     <Container>
                         <div style={{ justifyContent: 'center', display: 'flex' }}>
@@ -148,8 +147,8 @@ export default function CreateAMeet() {
                         </div>
                     </Container>
                 </div>
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={2}>
+            </CustomTabPanel> */}
+            <CustomTabPanel value={value} index={1}>
                 <div style={{ justifyContent: 'left', display: 'flex' }}>
                     <Container sx={{ justifyContent: 'left', display: 'flex' }}>
                         <h2 style={{ margin: '20px' }}>Choose a name for the meet</h2>
@@ -157,7 +156,7 @@ export default function CreateAMeet() {
                             id="outlined-multiline-flexible"
                             label="Name"
                             multiline
-                            Maxrows={4}
+                            maxRows={4}
                             style={{ width: '500px'}}
                             value={meetName}
                             onChange={(event) => {

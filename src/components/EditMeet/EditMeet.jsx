@@ -62,14 +62,6 @@ function EditMeet() {
             onChange={(event) => setMeetData({ ...meetData, description: event.target.value })}
           />
 
-          <h2 style={{ margin: '20px' }}>Enter Image URL</h2>
-          <TextField
-            id={`imageURL-${meet.id}`}
-            label="Image URL"
-            style={{ width: '500px' }}
-            value={meetData.imageURL}
-            onChange={(event) => setMeetData({ ...meetData, imageURL: event.target.value })}
-          />
 
           <h2 style={{ margin: '20px' }}>Enter Address</h2>
           <TextField
@@ -88,8 +80,10 @@ function EditMeet() {
             value={meetData.date}
             onChange={(event) => setMeetData({ ...meetData, date: event.target.value })}
           />
-          <Button onClick={() => handleEditMeet(meet.id)} variant='contained'>Edit Meet</Button>
-          <Button onClick={() => handleDeleteMeet(meet.id)} variant='contained'>Delete Meet</Button>
+          <div style={{margin:'30px'}}>
+          <Button onClick={() => handleEditMeet(meet.id)} variant='contained' style={{margin:'20px'}}>Edit Meet</Button>
+          <Button onClick={() => handleDeleteMeet(meet.id)} variant='contained' style={{margin:'20px'}}>Delete Meet</Button>
+          </div>
         </div>
       ))}
     </Container>
