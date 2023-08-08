@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
+import { Button } from '@mui/material';
 
 function EditMeet() {
 
@@ -87,10 +88,8 @@ function EditMeet() {
             value={meetData.date}
             onChange={(event) => setMeetData({ ...meetData, date: event.target.value })}
           />
-
-
-          <button onClick={() => handleEditMeet(meet.id)}>Edit Meet</button>
-          <button onClick={() => handleDeleteMeet(meet.id)}>Delete Meet</button>
+          <Button onClick={() => handleEditMeet(meet.id)} variant='contained'>Edit Meet</Button>
+          <Button onClick={() => handleDeleteMeet(meet.id)} variant='contained'>Delete Meet</Button>
         </div>
       ))}
     </Container>
