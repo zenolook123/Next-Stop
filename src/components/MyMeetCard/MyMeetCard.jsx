@@ -13,6 +13,10 @@ import { TextField } from '@mui/material';
 
 function MyMeetCard() {
   const myMeets = useSelector((store) => store.myMeetReducer);
+  const editMeet = useSelector((store) => store.editMeetReducer);
+  const initialMeetData = editMeet[0];
+  const [meetData, setMeetData] = useState(initialMeetData);
+
   const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedMeet, setSelectedMeet] = useState(null);
@@ -25,6 +29,19 @@ function MyMeetCard() {
 
     // Open the modal on Edit Meet button click
     openModal(id);
+  };
+
+  const handleEditMeet = (meetupId) => {
+    axios
+      .put(`/api/meets/${meetupId}`, meetData)
+      .then((response) => {
+        alert('Success updating meetup');
+        console.log('Meetup updated successfully');
+      })
+      .catch((error) => {
+        alert('Error updating meetup');
+        console.error('Error updating meetup:', error);
+      });
   };
 
   useEffect(() => {
@@ -66,7 +83,7 @@ function MyMeetCard() {
         </Card>
       ))}
 
-      {/* Editable Modal */}
+   
       <Modal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -114,6 +131,7 @@ function MyMeetCard() {
             </Typography>
             <TextField style={{width:'400px', height:'400px'}} rows={4} value={selectedMeet.meetup_description} onChange={(event) => setSelectedMeet({ ...selectedMeet, meetup_description: event.target.value })} />
           </Typography>
+          <Button variant='contained' onClick={handleEditMeet}>Save Details</Button>
         </div>
       </>
     )}

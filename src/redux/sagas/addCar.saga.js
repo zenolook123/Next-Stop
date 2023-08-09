@@ -14,7 +14,7 @@ function* fetchMyCars(action) {
 }
 
 function* addCar(action) {
-    axios.post('/api/cars/mycars', action.payload)
+    yield axios.post('/api/cars/mycars', action.payload)
         .then((response) => {
             console.log('ymmObject is', action.payload);
         })
@@ -25,7 +25,7 @@ function* addCar(action) {
 }
 
 function* addMod(action) {
-    axios.put(`/api/cars/mycars/mods/${action.id}`, {mods:action.payload})
+    yield axios.put(`/api/cars/mycars/mods/${action.id}`, {mods:action.payload})
         .then((response) => {
                 console.log(response)
         })

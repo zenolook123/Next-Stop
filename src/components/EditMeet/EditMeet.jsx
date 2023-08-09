@@ -7,10 +7,7 @@ import { Button } from '@mui/material';
 
 function EditMeet() {
 
-  const editMeet = useSelector((store) => store.editMeetReducer);
 
-  const initialMeetData = editMeet[0];
-  const [meetData, setMeetData] = useState(initialMeetData);
 
   const handleEditMeet = (meetupId) => {
     axios

@@ -94,6 +94,7 @@ function AllMeetCard() {
             </Typography>
             {selectedMeet.meetup_description}
           </Typography>
+         
         </div>
       </>
     )}

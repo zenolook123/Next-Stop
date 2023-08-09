@@ -12,9 +12,9 @@ function UserPage() {
   const myCars = useSelector((store) => store.addCarReducer);
   const dispatch = useDispatch()
 
-  const [selectedMake, setSelectedMake] = useState('Subaru');
-  const [selectedYear, setSelectedYear] = useState('2015');
-  const [selectedModel, setSelectedModel] = useState('WRX');
+  const [selectedMake, setSelectedMake] = useState('');
+  const [selectedYear, setSelectedYear] = useState('');
+  const [selectedModel, setSelectedModel] = useState('');
 
   const [modificationText, setModification] = useState('N/A');
   const [modifyingCarID, setCarToMod] = useState(0)
@@ -117,6 +117,7 @@ function UserPage() {
                       renderInput={(params) => <TextField {...params} label="Make" />}
                       onChange={handleMakeSelect}
                     />
+                    {selectedMake ? 
                     <Autocomplete
                       disablePortal
                       id="model-combo-box"
@@ -124,7 +125,17 @@ function UserPage() {
                       sx={{ width: 300, margin: '15px' }}
                       renderInput={(params) => <TextField {...params} label="Model" />}
                       onChange={handleModelSelect}
-                    />
+                    /> :      
+                    <Autocomplete
+                    readOnly
+                    disablePortal
+                    id="model-combo-box"
+                    sx={{ width: 300, margin: '15px' }}
+                    renderInput={(params) => <TextField {...params} label="Model" />}
+                  />}
+                     
+
+               
                   </CardContent>
                 </Card>
               </Grid>
