@@ -118,36 +118,12 @@ export default function CreateAMeet() {
                     <Container>
                         <div style={{ justifyContent: 'center', display: 'flex' }}>
                             <Container sx={{ display: 'flex', justifyContent: 'center' }}>
-                                <img src={image} style={{ maxHeight: '300px', maxWidth: '300px', display: 'inline-flex' }}></img>
+                                <img src={image} style={{ maxHeight: '400px', maxWidth: '800px', display: 'inline-flex' }}></img>
                             </Container>
                         </div>
                     </Container>
                 </div>
             </CustomTabPanel>
-            {/* <CustomTabPanel value={value} index={1}>
-                <div>
-                    <Container>
-                        <div style={{ justifyContent: 'center', display: 'flex' }}>
-                            <Container sx={{ justifyContent: 'center', display: 'flex' }}>
-                                {member.map((members) => {
-                                    const handleInvite = () => {
-                                        dispatch({
-                                            type: 'SEND_INVITE',
-                                            payload: members.id
-                                        })
-                                    }
-                                    return (
-                                        <>
-                                            <Button variant='contained' sx={{ height: '20px', margin: '20px' }} onClick={handleInvite} key={members.id}>Invite {members.username}</Button>
-                                        </>
-                                    )
-                                })}
-
-                            </Container>
-                        </div>
-                    </Container>
-                </div>
-            </CustomTabPanel> */}
             <CustomTabPanel value={value} index={1}>
                 <div style={{ justifyContent: 'left', display: 'flex' }}>
                     <Container sx={{ justifyContent: 'left', display: 'flex' }}>
