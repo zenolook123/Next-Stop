@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
-import member from './members.reducer'
+import members from './members.reducer'
 import myMeetReducer from './myMeet.reducer';
 import editMeetReducer from './editMeet.reducer';
 import allMeetReducer from './allMeet.reducer';
@@ -16,7 +16,7 @@ import inviteReducer from './invite.reducer';
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user,
-  member,
+  members,
   myMeetReducer,
   editMeetReducer,
   allMeetReducer,

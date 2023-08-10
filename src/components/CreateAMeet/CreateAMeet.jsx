@@ -47,11 +47,11 @@ export default function CreateAMeet() {
 
 
     const dispatch = useDispatch()
-    const gifurl = 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921'
+    const loadingIconGif = 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921'
     const [image, setImageURL] = useState("https://icons.veryicon.com/png/o/miscellaneous/1em/add-image.png")
     const [address, setAddress] = useState('')
     const [date, setDate] = useState(undefined)
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
     const [description, setDescription] = useState('')
     const [meetName, setMeetName] = useState('')
     const member = useSelector(store => store.member);
@@ -62,7 +62,7 @@ export default function CreateAMeet() {
 
 
     const handleSubmit = (event) => {
-        setImageURL(gifurl)
+        setImageURL(loadingIconGif)
         event.preventDefault();
         const formData = new FormData();
         formData.append('photo', event.target.photo.files[0]);
@@ -75,9 +75,6 @@ export default function CreateAMeet() {
             .catch((error) => {
                 console.error('Error uploading file:', error);
             });
-        dispatch({
-            type: 'FETCH_MEMBERS'
-        })
     };
 
     const handleChange = (event, newValue) => {

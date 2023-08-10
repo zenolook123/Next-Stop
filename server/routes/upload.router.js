@@ -2,7 +2,6 @@ const express = require('express');
 const multer = require('multer');
 const AWS = require('aws-sdk');
 const router = express.Router();
-const pool = require('../modules/pool');
 
 
 AWS.config.update({
@@ -19,7 +18,7 @@ const upload = multer({
 
 router.post('/api/upload', upload.single('photo'), (req, res) => {
   const file = req.file;
-  const bucket = 'weekendspikebucket';
+  const bucket = 'weekendspikebucket'; //Check for renaming possibly in s3
   const key = `${Date.now().toString()}-${file.originalname}`;
 
   const params = {
