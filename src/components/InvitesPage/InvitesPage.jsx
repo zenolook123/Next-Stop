@@ -5,6 +5,7 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
 import { useEffect } from 'react';
+
 function InvitesPage({ selectedMeet }) {
   const members = useSelector((store) => store.members);
   const dispatch = useDispatch();
