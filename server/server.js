@@ -31,7 +31,7 @@ app.use('/', uploadRouter )
 app.use('/api/members', membersRouter)
 app.use('/api/meets', meetsRouter)
 app.use('/api/cars', carRouter)
-app.use('api/invites', invitesRouter)
+app.use('/api/invites', invitesRouter)
 
 // Serve static files
 app.use(express.static('build'));

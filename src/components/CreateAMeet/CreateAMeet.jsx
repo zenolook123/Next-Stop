@@ -11,6 +11,7 @@ import { useState } from "react";
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -98,6 +99,12 @@ export default function CreateAMeet() {
               });
     }
 
+    useEffect(() => {
+        dispatch({
+          type: "FETCH_INVITES",
+        });
+      }, []);
+    
     return (
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

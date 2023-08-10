@@ -61,6 +61,7 @@ function UserPage() {
       payload: modificationText,
       id: modifyingCarID
     })
+    setModification('')
   };
 
 
@@ -68,6 +69,9 @@ function UserPage() {
     dispatch({
       type: "FETCH_CARS",
       payload: user.id
+    });
+    dispatch({
+      type: "FETCH_INVITES",
     });
   }, []);
 
@@ -194,7 +198,6 @@ function UserPage() {
                 <Button variant="contained" onClick={handleAddMod}>
                   Add Modification
                 </Button>
-                <h2>WHEN ADDING MODS IT WILL ERASE PREVIOUS ENTRIES</h2>
               </Grid>
             </Grid>
           </CardContent>

@@ -23,7 +23,7 @@ router.post('/', (req,res) => {
     const queryText = `INSERT INTO "invites" (meetup_id, user_id, attending)
     VALUES ($1, $2, $3)`;
     pool
-    .query(queryText, [req.body.meetupID, req.body.inviteID, 0])
+    .query(queryText, [req.body.meetID, req.body.memberID, 0])
     .then(() => res.sendStatus(201))
     .catch((err) => {
       console.log('User registration failed: ', err);

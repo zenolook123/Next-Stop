@@ -7,9 +7,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import { useEffect } from 'react';
+
 export default function Nav() {
   const user = useSelector((store) => store.user);
   const invites = useSelector((store) => store.invites)
@@ -20,6 +21,13 @@ export default function Nav() {
       type: 'FETCH_ALL_MEETS'
     })
   }
+
+  useEffect(() => {
+    dispatch({
+      type: "FETCH_INVITES",
+    });
+  }, []);
+
 
 
   return (
@@ -42,16 +50,9 @@ export default function Nav() {
             </>
           ) : (
             <>
-              <Button
-                variant="contained"
-                onClick={() => dispatch({ type: 'LOGOUT' })}
-                style={{marginRight:'30px'}}
-              >
-                Log Out
-              </Button>
 
               <Link to="/notifications" style={{ textDecoration: 'none', color: 'inherit', marginRight:'20px' }}>
-              {!invites ? (
+              {invites ? (
                 <NotificationsIcon />) : (
                 <NotificationsActiveIcon />
               )}
@@ -70,6 +71,13 @@ export default function Nav() {
               <Link to="/meetdashboard" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <Button color="inherit" onClick={handleDashClick}>Dashboard</Button>
               </Link>
+              <Button
+                variant="contained"
+                onClick={() => dispatch({ type: 'LOGOUT' })}
+                style={{marginRight:'30px'}}
+              >
+                Log Out
+              </Button>
             </>
           )}
         </Toolbar>

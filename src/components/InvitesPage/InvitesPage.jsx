@@ -1,43 +1,63 @@
-import { Button, Container } from "@mui/material"
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 
-//NEED TO IMPLEMENT A MEETS PAGE WHERE YOU CAN VIEW THE MEET EXPANDED
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Button from '@mui/material/Button';
+import { useEffect } from 'react';
+function InvitesPage({ selectedMeet }) {
+  const members = useSelector((store) => store.members);
+  const dispatch = useDispatch();
+  
+  const [invitedMembers, setInvitedMembers] = useState([]);
 
-function InvitesPage() {
-    const invites = useSelector(store => store.inviteReducer);
-    const dispatch = useDispatch()
+  const handleCheckboxChange = (memberID) => {
+    if (invitedMembers.includes(memberID)) {
+      setInvitedMembers(invitedMembers.filter((id) => id !== memberID));
+    } else {
+      setInvitedMembers([...invitedMembers, memberID]);
+    }
+  };
 
-    return (
-        <Container sx={{ justifyContent: 'center', display: 'flex' }}>
-            {invites.map((invites) => {
-                const acceptInvite = () => {
-                    dispatch({
-                        type: 'ACCEPT_INVITE',
-                        payload: 1
-                    })
-                }
-                const declineInvite = () => {
-                    dispatch({
-                        type: 'DECLINE_INVITE',
-                        payload: 2
-                    })
-                }
-                return (
-                    <>
-                        <Container>
-                            <h5>{invites.name}</h5>
-                        <Button variant='contained' sx={{ height: '20px', margin: '20px' }} onClick={acceptInvite}>Accept Invite</Button>
-                        <Button variant='contained' sx={{ height: '20px', margin: '20px' }} onClick={declineInvite}>Decline Invite</Button>
-                        </Container>
-                      
-                    </>
-                )
-            })}
+  useEffect(() => {
+    dispatch({
+      type: "FETCH_MEMBERS"
+    });
+  }, []);
 
-        </Container>)
+  const sendInvite = (meetID, memberID) => {
+    dispatch({
+      type: 'SEND_INVITE',
+      payload: {
+        meetID,
+        memberID,
+      },
+    });
+  };
 
+
+  return (
+    <div>
+      {members.map((member) => (
+        <>
+        <FormControlLabel
+          key={member.id}
+          control={
+            <Checkbox
+              checked={invitedMembers.includes(member.id)}
+              onChange={() => handleCheckboxChange(member.id)}
+            />
+          }
+          label={member.username}
+        />
+        <Button variant="contained" color="primary" onClick={() => {sendInvite(selectedMeet.id, member.id)}}>
+       Invite
+      </Button>
+      <br></br>
+      </>
+      ))}
+    </div>
+  );
 }
 
-
-export default InvitesPage
+export default InvitesPage;

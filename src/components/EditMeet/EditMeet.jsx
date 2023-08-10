@@ -9,31 +9,6 @@ function EditMeet() {
 
 
 
-  const handleEditMeet = (meetupId) => {
-    axios
-      .put(`/api/meets/${meetupId}`, meetData)
-      .then((response) => {
-        alert('Success updating meetup');
-        console.log('Meetup updated successfully');
-      })
-      .catch((error) => {
-        alert('Error updating meetup');
-        console.error('Error updating meetup:', error);
-      });
-  };
-
-  const handleDeleteMeet = (meetupId) => {
-    axios
-      .delete(`/api/meets/${meetupId}`)
-      .then((response) => {
-        alert('Meetup deleted successfully');
-        console.log('Meetup deleted successfully');
-      })
-      .catch((error) => {
-        alert('Error deleting meetup');
-        console.error('Error deleting meetup:', error);
-      });
-  };
 
   return (
     <Container sx={{ justifyContent: 'left', display: 'flex' }}>

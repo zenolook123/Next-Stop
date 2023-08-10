@@ -36,6 +36,9 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
+    dispatch({
+      type: "FETCH_INVITES",
+    });
   }, [dispatch]);
 
   return (
