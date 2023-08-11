@@ -83,112 +83,101 @@ export default function CreateAMeet() {
     };
 
     const handleNext = () => {
-            dispatch({
-                type: 'SET_CREATE_MEET',
-                payload: {
-                    imageURL: image,
-                    address: address,
-                    date: date.$d,
-                    description: description,
-                    meetName:`${meetName}, ran by ${user.username}!`,
-                    creatorID:userID,
-                }
-            })
-            dispatch({
-                type: "FETCH_MY_MEETS",
-              });
+        dispatch({
+            type: 'SET_CREATE_MEET',
+            payload: {
+                imageURL: image,
+                address: address,
+                date: date.$d,
+                description: description,
+                meetName: `${meetName}, ran by ${user.username}!`,
+                creatorID: userID,
+            }
+        })
+        dispatch({
+            type: "FETCH_MY_MEETS",
+        });
     }
 
     useEffect(() => {
         dispatch({
-          type: "FETCH_INVITES",
+            type: "FETCH_INVITES",
         });
-      }, []);
-    
+    }, []);
+
     return (
-        <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" variant='fullWidth'>
-                    <Tab label="Choose a photo for the meet" {...a11yProps(0)} />
-                    <Tab label="When/Where?" {...a11yProps(2)} />
-                </Tabs>
-            </Box>
-            <CustomTabPanel value={value} index={0}>
-                <div>
-                    <form encType='multipart/form-data' onSubmit={handleSubmit} style={{display:'flex',justifyContent:'center'}}>
-                                    <input type="file" name='photo' style={{fontSize:'1rem'}}/>
-                                    <button type="submit" style={{fontSize:'1rem'}}>Upload Photo</button>
-                                </form>
-                    <Container>
-                        <div style={{ justifyContent: 'center', display: 'flex' }}>
-                            <Container sx={{ display: 'flex', justifyContent: 'center' }}>
-                                <img src={image} style={{ maxHeight: '400px', maxWidth: '800px', display: 'inline-flex' }}></img>
-                            </Container>
-                        </div>
-                    </Container>
+        <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%', marginTop:'100px'}}>
+          <Box sx={{ flex: 1 }}>
+            <div>
+              <form encType='multipart/form-data' onSubmit={handleSubmit} style={{ display: 'flex', justifyContent: 'center' }}>
+                <input type="file" name='photo' style={{ fontSize: '1rem' }} />
+                <button type="submit" style={{ fontSize: '1rem' }}>Upload Photo</button>
+              </form>
+              <Container>
+                <div style={{ justifyContent: 'center', display: 'flex' }}>
+                  <Container sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <img src={image} style={{ maxHeight: '400px', maxWidth: '800px', display: 'inline-flex' }} alt="Uploaded" />
+                  </Container>
                 </div>
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={1}>
-                <div style={{ justifyContent: 'left', display: 'flex' }}>
-                    <Container sx={{ justifyContent: 'left', display: 'flex' }}>
-                        <h2 style={{ margin: '20px' }}>Choose a name for the meet</h2>
-                        <TextField
-                            id="outlined-multiline-flexible"
-                            label="Name"
-                            multiline
-                            maxRows={4}
-                            style={{ width: '500px'}}
-                            value={meetName}
-                            onChange={(event) => {
-                                setMeetName(event.target.value);
-                            }}
-                        />
-                    </Container>
-                    </div>
-                        <div style={{ justifyContent: 'left', display: 'flex' }}>
-                            <Container sx={{ justifyContent: 'left', display: 'flex' }}>
-                                <h2 style={{ margin: '20px' }}>Where do you want to meet up?</h2>
-                                <TextField
-                                    id="outlined-controlled"
-                                    label="Enter an address"
-                                    value={address}
-                                    onChange={(event) => {
-                                        setAddress(event.target.value);
-                                    }}
-                                    style={{ width: '400px' }}
-                                />
-                            </Container>
-                        </div>
-                        <div style={{ justifyContent: 'left', display: 'flex' }}>
-                            <Container sx={{ justifyContent: 'left', display: 'flex' }}>
-                                <h2 style={{ margin: '20px' }}>When is it?</h2>
-                                <DateTimePicker value={date} onChange={(date) => setDate(date)} />
-                            </Container>
-                        </div>
-                        <div style={{ justifyContent: 'left', display: 'flex' }}>
-                            <Container sx={{ justifyContent: 'left', display: 'flex' }}>
-                                <h2 style={{ margin: '20px' }}>Give a brief description of the meet</h2>
-
-                                <TextField
-                                    id="outlined-multiline-flexible"
-                                    label="Description"
-                                    multiline
-                                    rows={4}
-                                    style={{ width: '500px' }}
-                                    value={description}
-                                    onChange={(event) => {
-                                        setDescription(event.target.value);
-                                    }}
-                                />
-                            </Container>
-                        </div>
-                <Container>
-                    <div style={{ justifyContent: 'center', display: 'flex' }}>
-                            <Button variant='contained' onClick={handleNext} style={{ margin: '30px' }}>To Meet Dashboard</Button>
-                    </div>
-                </Container>
-
-            </CustomTabPanel>
+              </Container>
+            </div>
+          </Box>
+          
+          <Box sx={{ flex: 1 }}>
+            <div style={{ margin: '20px', width: '500px' }}>
+              <h2>Choose a name for the meet</h2>
+              <TextField
+                id="outlined-multiline-flexible"
+                label="Name"
+                multiline
+                maxRows={4}
+                fullWidth
+                value={meetName}
+                onChange={(event) => {
+                  setMeetName(event.target.value);
+                }}
+              />
+            </div>
+    
+            <div style={{ margin: '20px', width: '400px' }}>
+              <h2>Where do you want to meet up?</h2>
+              <TextField
+                id="outlined-controlled"
+                label="Enter an address"
+                fullWidth
+                value={address}
+                onChange={(event) => {
+                  setAddress(event.target.value);
+                }}
+              />
+            </div>
+    
+            <div style={{ margin: '20px' }}>
+              <h2>When is it?</h2>
+              <DateTimePicker value={date} onChange={(date) => setDate(date)} />
+            </div>
+    
+            <div style={{ margin: '20px', width: '500px' }}>
+              <h2>Give a brief description of the meet</h2>
+              <TextField
+                id="outlined-multiline-flexible"
+                label="Description"
+                multiline
+                rows={4}
+                fullWidth
+                value={description}
+                onChange={(event) => {
+                  setDescription(event.target.value);
+                }}
+              />
+            </div>
+    
+            <div style={{ margin: '30px' }}>
+              <Button variant="contained" onClick={handleNext}>
+                To Meet Dashboard
+              </Button>
+            </div>
+          </Box>
         </Box>
-    );
-}
+      );
+    }

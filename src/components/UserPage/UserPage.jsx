@@ -81,21 +81,6 @@ function UserPage() {
         <Typography variant="h4" gutterBottom>
           Welcome, {user.username}!
         </Typography>
-        {/* <Card>
-          <CardContent>
-            <Typography variant="h5" gutterBottom>
-              Update Profile
-            </Typography>
-            <form>
-              <TextField label="Full Name" fullWidth margin="normal" />
-              <TextField label="What kind of cars" fullWidth margin="normal" />
-              <Button variant="contained" color="primary" style={{ marginTop: '20px' }}>
-                Update Profile
-              </Button>
-            </form>
-          </CardContent>
-        </Card> */}
-
         <Card style={{ marginTop: '20px' }}>
           <CardContent>
             <Typography variant="h5" gutterBottom>
