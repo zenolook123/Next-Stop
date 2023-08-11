@@ -45,7 +45,7 @@ export default function Nav() {
 
   const open = Boolean(anchorEl);
 
-
+  const pendingInvites = invites.filter((invite) => invite.attending !== 1 && invite.attending !== 2);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -72,7 +72,7 @@ export default function Nav() {
                 aria-describedby="notifications-popover"
                 onClick={handlePopoverOpen}
               >
-                {invites.length > 0 ? <NotificationsActiveIcon /> : <NotificationsIcon />}
+                {pendingInvites.length > 0 ? <NotificationsActiveIcon /> : <NotificationsIcon />}
               </IconButton>
               <Popover
                 id="notifications-popover"

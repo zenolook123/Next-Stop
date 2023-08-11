@@ -43,13 +43,15 @@ router.delete('/', (req, res) => {
 });
 
 router.put('/', (req, res) => {
-  const attendingStatus = req.body.status;
+  const meetID = req.body.meetID
+  const userID = req.body.userID
+  const attendingStatus = req.body.attending
   const queryText = `UPDATE "invites" SET
-    attending = $1,
- `;
+  attending = $1
+  WHERE meetup_id = $2 AND user_id = $3`;
 
   pool
-    .query(queryText, [attendingStatus])
+    .query(queryText, [attendingStatus, meetID, userID])
     .then(() => res.sendStatus(204))
     .catch((err) => {
       console.log('Update meetup failed: ', err);

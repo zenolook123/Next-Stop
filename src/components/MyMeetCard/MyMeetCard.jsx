@@ -77,7 +77,6 @@ function MyMeetCard() {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Invite To Meet</Button>
             <Button size="small" onClick={() => handleClick(meet.id)}>Edit Meet</Button>
           </CardActions>
         </Card>

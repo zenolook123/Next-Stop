@@ -17,20 +17,28 @@ function* sendInvite(action){
         console.log("error sending invite", error)
     }
 }
-function* acceptInvite(action){
-    try{
-        const response = yield axios.put('/api/invites', action.payload);
-    } catch (error){
-        console.log("error accepting invite", error)
+function* acceptInvite(action) {
+    try {
+      yield axios.put('/api/invites', {
+        meetID: action.payload.meetID,
+        userID: action.payload.userID,
+        attending: action.payload.attending,
+      });
+    } catch (error) {
+      console.log('Error accepting invite', error);
     }
-}
-function* declineInvite(action){
-    try{
-        const response = yield axios.put('/api/invites', action.payload);
-    } catch (error){
-        console.log("error declining invite", error)
+  }
+function* declineInvite(action) {
+    try {
+      yield axios.put('/api/invites', {
+        meetID: action.payload.meetID,
+        userID: action.payload.userID,
+        attending: action.payload.attending,
+      });
+    } catch (error) {
+      console.log('Error declining invite', error);
     }
-}
+  }
 function* InviteSaga() {
   yield takeLatest('FETCH_INVITES', fetchInvites);
   yield takeLatest('SEND_INVITE', sendInvite)
