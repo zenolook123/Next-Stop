@@ -18,7 +18,6 @@ import MyMeets from '../MyMeets/MyMeets'
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import EditMeet from '../EditMeet/EditMeet'
 
 import './App.css';
 import CreateAMeet from '../CreateAMeet/CreateAMeet';

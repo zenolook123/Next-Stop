@@ -14,7 +14,7 @@ function MyMeetCard() {
   const myMeets = useSelector((store) => store.myMeetReducer);
   const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedMeet, setSelectedMeet] = useState(null);
+  const [selectedMeet, setSelectedMeet] = useState();
 
   const handleClick = (id) => {
     const selected = myMeets.find((meet) => meet.id === id);

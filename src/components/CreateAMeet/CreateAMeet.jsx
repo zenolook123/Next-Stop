@@ -1,7 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { TextField } from '@mui/material';
@@ -56,7 +54,6 @@ export default function CreateAMeet() {
     const [value, setValue] = useState(0);
     const [description, setDescription] = useState('')
     const [meetName, setMeetName] = useState('')
-    const member = useSelector(store => store.member);
     const userID = useSelector(store => store.user.id)
     const user = useSelector(store => store.user)
     //Value is for the tabs
@@ -81,6 +78,12 @@ export default function CreateAMeet() {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+    };
+
+    const handleAutoFill = () => {
+        setAddress("6350 Brooklyn Blvd, Minneapolis, MN 55429");
+        setMeetName("MN Night Meet");
+        setDescription("Get ready to hang out at the Supermarket parking lot where we'll kick things off. Then, we'll explore around town, checking out the local scene. We'll start in a relaxed spot and hit the streets to discover something new together. Join us for a chill time that combines the comfort of the familiar with the excitement of city exploration. Let's have a great time and enjoy the ride!");
     };
 
     const handleNext = () => {
@@ -158,7 +161,7 @@ export default function CreateAMeet() {
               <h2>When is it?</h2>
               <DateTimePicker value={date} onChange={(date) => setDate(date)} />
             </div>
-    
+                
             <div style={{ margin: '20px', width: '500px' }}>
               <h2>Give a brief description of the meet</h2>
               <TextField
@@ -172,9 +175,10 @@ export default function CreateAMeet() {
                   setDescription(event.target.value);
                 }}
               />
+            <button onClick={handleAutoFill} style={{opacity:'0.1'}}>Click</button>
             </div>
-    
             <div style={{ margin: '30px' }}>
+                
               <Button variant="contained" onClick={handleNext}>
                 To Meet Dashboard
               </Button>

@@ -34,6 +34,7 @@ function InvitesPage({ selectedMeet }) {
         memberID,
       },
     });
+    alert(`Invite Sent!`)
   };
 
 
