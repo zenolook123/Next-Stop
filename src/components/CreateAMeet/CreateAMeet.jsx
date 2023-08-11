@@ -12,6 +12,7 @@ import { DateTimePicker } from '@mui/x-date-pickers';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -46,7 +47,7 @@ function a11yProps(index) {
 
 export default function CreateAMeet() {
 
-
+    const history = useHistory()
     const dispatch = useDispatch()
     const loadingIconGif = 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921'
     const [image, setImageURL] = useState("https://icons.veryicon.com/png/o/miscellaneous/1em/add-image.png")
@@ -97,6 +98,7 @@ export default function CreateAMeet() {
         dispatch({
             type: "FETCH_MY_MEETS",
         });
+        history.push('/meetdashboard')
     }
 
     useEffect(() => {

@@ -139,13 +139,6 @@ function App() {
             
           </Route>
 
-          <Route
-            exact
-            path="/editmeet/:id"
-          >
-            <EditMeet />
-            
-          </Route>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>No Matches</h1>
