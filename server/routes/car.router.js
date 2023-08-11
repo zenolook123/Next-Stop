@@ -46,6 +46,17 @@ router.put('/mycars/mods/:id', (req, res) => {
     });
 });
 
+router.delete('/mycars/:id', (req, res) => {
+  const carId = req.params.id;
+  const queryText = `DELETE from "car" WHERE id = $1`;
+  pool
+    .query(queryText, [carId])
+    .then(() => res.sendStatus(200))
+    .catch((err) => {
+      console.log('Car mods update failed: ', err);
+      res.sendStatus(500);
+    });
+});
 
 
 module.exports = router;

@@ -64,7 +64,12 @@ function UserPage() {
     setModification('')
   };
 
-
+  const handleDeleteCar = (id) => {
+    dispatch({
+      type: 'DELETE_CAR',
+      payload:id
+    })
+  }
   useEffect(() => {
     dispatch({
       type: "FETCH_CARS",
@@ -130,14 +135,21 @@ function UserPage() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 {myCars.map((car) => (
+                  <>
+                  <div>
+            
+                  </div>
                   <Card style={{ margin: "10px" }}>
                     <CardContent style={{ backgroundColor: '#fafafa' }}>
                       <div key={car.id}>
-                        <h3 style={{ margin: '2px' }}>{car.year} {car.make} {car.model}</h3>
+                        <h3 style={{ margin: '2px' }}>{car.year} {car.make} {car.model}</h3> 
                         <h6 style={{ margin: '2px' }}>Mods:{car.mods}</h6>
+                        <Button style={{fontSize:'.7rem'}} variant='contained' onClick={() => handleDeleteCar(car.id)}>Delete Car</Button>
                       </div>
                     </CardContent>
                   </Card>
+                  
+                  </>
                 ))}
               </Grid>
             </Grid>

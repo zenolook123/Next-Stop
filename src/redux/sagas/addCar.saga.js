@@ -35,10 +35,20 @@ function* addMod(action) {
         yield put({ type: 'FETCH_CARS'})
 }
 
+function* deleteCar(action) {
+    yield axios.delete(`/api/cars/mycars/${action.payload}`).then((response)=>{
+        console.log(response)
+    }).catch((error)=> {
+        console.log('Error deleting car', error)
+    })
+    yield put({ type: 'FETCH_CARS'})
+}
+
 function* addCarSaga() {
     yield takeLatest('FETCH_CARS', fetchMyCars)
     yield takeLatest('ADD_CAR', addCar)
     yield takeLatest('ADD_MOD', addMod)
+    yield takeLatest('DELETE_CAR', deleteCar)
 }
 
 export default addCarSaga
