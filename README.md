@@ -48,12 +48,9 @@
 
 ### **Contact**
 
-* **YOUR_NAME** - 
+* **Zach Garrison** - 
 <a target="_blank" href="mailto:zacharygarrison97@gmail.com">Email</a>
 
-<!-- ACKNOWLEDGMENTS -->
-
-### **Acknowledgments**
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
