@@ -1,10 +1,13 @@
 const express = require('express');
 const pool = require('../modules/pool');
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated,(req, res) => {
     const queryText = `SELECT * FROM "invites" where "user_id" = $1`;
   pool
     .query(queryText, [req.user.id])
@@ -19,7 +22,7 @@ router.get('/', (req, res) => {
 
 
 
-router.post('/', (req,res) => {
+router.post('/',rejectUnauthenticated, (req,res) => {
     const queryText = `INSERT INTO "invites" (meetup_id, user_id, attending)
     VALUES ($1, $2, $3)`;
     pool
@@ -31,7 +34,7 @@ router.post('/', (req,res) => {
     });
 })
 
-router.delete('/', (req, res) => {
+router.delete('/', rejectUnauthenticated,(req, res) => {
   const queryText = `DELETE FROM "invites" WHERE id = $1`;
   pool
     .query(queryText, [req.body.meetupId])
@@ -42,7 +45,7 @@ router.delete('/', (req, res) => {
     });
 });
 
-router.put('/', (req, res) => {
+router.put('/', rejectUnauthenticated,(req, res) => {
   const meetID = req.body.meetID
   const userID = req.body.userID
   const attendingStatus = req.body.attending

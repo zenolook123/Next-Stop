@@ -1,10 +1,13 @@
 const express = require('express');
 const pool = require('../modules/pool');
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 
 const router = express.Router();
 
-router.get('/mymeets', (req, res) => {
+router.get('/mymeets',rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT * FROM "meetups" where "creator_id" = $1`;
   pool
     .query(queryText, [req.user.id])
@@ -16,7 +19,7 @@ router.get('/mymeets', (req, res) => {
       res.sendStatus(500);
     });
 });
-router.get('/', (req, res) => {
+router.get('/',rejectUnauthenticated, (req, res) => {
   const queryText = `SELECT * FROM "meetups"`;
 pool
   .query(queryText)
@@ -30,7 +33,7 @@ pool
 });
 
 
-router.get('/:id', (req, res) => {
+router.get('/:id',rejectUnauthenticated, (req, res) => {
   const meetupId = req.params.id
   const queryText = `SELECT * FROM "meetups" WHERE "id" = $1`
 
@@ -45,7 +48,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', (req,res) => {
+router.post('/', rejectUnauthenticated,(req,res) => {
     const queryText = `INSERT INTO "meetups" (meetup_name, meetup_description, meetup_picture, meet_address, meet_date, meet_type, creator_id)
     VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`;
     pool
@@ -57,7 +60,7 @@ router.post('/', (req,res) => {
     });
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated,(req, res) => {
   const meetupId = req.params.id;
   const queryText = `DELETE FROM "meetups" WHERE id = $1`;
   pool
@@ -69,28 +72,22 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', rejectUnauthenticated,(req, res) => {
   const meetupId = req.params.id;
   const queryText = `UPDATE "meetups" SET
     meetup_name = $1,
     meetup_description = $2,
-    meetup_picture = $3,
-    meet_address = $4,
-    meet_date = $5,
-    meet_type = $6
-    WHERE id = $7`;
+    meet_address = $3
+    WHERE id = $4`;
 
   const {
-    meetName,
-    description,
-    imageURL,
-    address,
-    date,
-    meetType
+    meetup_name,
+    meetup_description,
+    meetup_address,
   } = req.body;
 
   pool
-    .query(queryText, [meetName, description, imageURL, address, date, meetType, meetupId])
+    .query(queryText, [meetup_name,meetup_address,meetup_description, meetupId])
     .then(() => res.sendStatus(204))
     .catch((err) => {
       console.log('Update meetup failed: ', err);

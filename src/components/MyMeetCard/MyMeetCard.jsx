@@ -34,6 +34,7 @@ function MyMeetCard() {
         console.error('Error updating meetup:', error);
       });
   };
+  
 
   const handleDeleteMeet = (id) => {
     axios
@@ -106,7 +107,7 @@ function MyMeetCard() {
                   <Typography variant="h5" style={{ fontWeight: 'bold' }}>
                     Description:
                   </Typography>
-                  <TextField style={{ width: '400px', height: '400px' }} multiline rows={4} value={selectedMeet.meetup_description} onChange={(event) => setSelectedMeet({ ...selectedMeet, meetup_description: event.target.value })} />
+                  <TextField style={{ width: '600px', height: '600px' }} multiline rows={6} value={selectedMeet.meetup_description} onChange={(event) => setSelectedMeet({ ...selectedMeet, meetup_description: event.target.value })} />
                 </Typography>
                 <Button variant="contained" onClick={handleEditMeet}>Save Details</Button>
               </div>

@@ -1,10 +1,13 @@
 const express = require('express');
 const pool = require('../modules/pool');
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 
 const router = express.Router();
 
-router.get('/mycars/:id', (req, res) => {
+router.get('/mycars/:id',rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT * FROM "car" where "user_id" = $1`;
   pool
     .query(queryText, [req.user.id])
@@ -17,7 +20,7 @@ router.get('/mycars/:id', (req, res) => {
     });
 });
 
-router.post('/mycars', (req,res) => {
+router.post('/mycars', rejectUnauthenticated,(req,res) => {
     console.log('In router post', req.body)
     const queryText = `INSERT INTO "car" (make, model, year, user_id, mods)
     VALUES ($1, $2, $3, $4, $5) RETURNING id`;
@@ -30,7 +33,7 @@ router.post('/mycars', (req,res) => {
     });
 })
 
-router.put('/mycars/mods/:id', (req, res) => {
+router.put('/mycars/mods/:id',rejectUnauthenticated, (req, res) => {
   const carId = req.params.id;
   const newMods = req.body.mods;
   const queryText = `UPDATE "car"
@@ -46,7 +49,7 @@ router.put('/mycars/mods/:id', (req, res) => {
     });
 });
 
-router.delete('/mycars/:id', (req, res) => {
+router.delete('/mycars/:id',rejectUnauthenticated, (req, res) => {
   const carId = req.params.id;
   const queryText = `DELETE from "car" WHERE id = $1`;
   pool

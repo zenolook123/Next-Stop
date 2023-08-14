@@ -1,10 +1,13 @@
 const express = require('express');
 const pool = require('../modules/pool');
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated,(req, res) => {
     const queryText = `SELECT * FROM "user"`;
   pool
     .query(queryText)
